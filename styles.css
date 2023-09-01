@@ -32,15 +32,18 @@ nav div {
     background-color: white;
     border-radius: 0.3rem;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .featuredProduct .info {
     display: flex;
     flex-direction: column;
+    padding: 10px   ;
 }
 
 .featuredProduct .info2 {
     display: flex;
+    justify-content: space-between;
 }
 
 .featuredProduct .buyButton {
@@ -51,6 +54,7 @@ nav div {
 .featuredProduct .price {
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 .ofertProducts {
@@ -83,4 +87,16 @@ nav div {
 .ofertProduct .price {
     display: flex;
     flex-direction: column;
+}
+
+.newsProducts{
+    display: flex;
+    gap: 30px;
+    padding: 0px 0px 50px 0px;
+}
+
+.newsProduct {
+    display: flex;
+    background-color: green;
+    flex-direction: row;
 }
