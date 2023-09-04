@@ -49,13 +49,45 @@ nav div {
 .featuredProduct .buyButton {
     display: flex;
     background-color: black;
+    width: 70px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 10px 0px 0px;
+}
+
+.bagSvg{
+    width: 24px;
+    height: 24px;
+}
+
+.plusSvg{
+    width: 22px;
+    height: 22px;
 }
 
 .featuredProduct .price {
     display: flex;
     flex-direction: column;
-    padding-right: 10px;
+    padding-right: 20px;
+    align-items: flex-end;
 }
+
+.productoId {
+    padding-top: 11px;
+}
+
+.productoPrecio{
+    font-size: 18px;
+    color: #808080;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.productoDiscountPrecio {
+    color: #941B0C;
+    font-size: 43px;
+    font-weight: 500;
+    }
 
 .ofertProducts {
     display: flex;
@@ -75,18 +107,34 @@ nav div {
     flex-direction: column;
 }
 
+
+
 .ofertProduct .info2 {
     display: flex;
+    justify-content: space-between;
 }
 
 .ofertProduct .buyButton {
     display: flex;
     background-color: black;
+    width: 70px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 10px 0px 0px;
 }
 
 .ofertProduct .price {
     display: flex;
     flex-direction: column;
+    padding-right: 20px;
+    align-items: flex-end;
+}
+
+.etiquetaSvg {
+    width: 71px;
+    height: 71px;
+    position: absolute;
+    right: 20px;
 }
 
 .newsProducts{

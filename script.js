@@ -34,6 +34,12 @@ const featuredProducts = [
     }
 ]
 
+localStorage.setItem("productosEnVenta_featured", JSON.stringify(featuredProducts));
+
+async function getFeaturedProducts() {
+    return featuredProducts;
+}
+
 const ofertProducts = [
     {
         id: "ofert-4",
@@ -73,6 +79,12 @@ const ofertProducts = [
     }
 ]
 
+localStorage.setItem("productosEnVenta_ofert", JSON.stringify(ofertProducts));
+
+async function getOfertProducts() {
+    return ofertProducts;
+}
+
 const newsProducts = [
     {
         id: "news-8",
@@ -92,10 +104,25 @@ const newsProducts = [
     }
 ]
 
+localStorage.setItem("productosEnVenta_news", JSON.stringify(newsProducts));
+
+async function getNewsProducts() {
+    return newsProducts;
+}
+
 
 let featuredProductsContainer
 let ofertProductsContainer
 let newsProductsContainer
+
+const handleAddProduct = (product) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || []; // Check si ya hay productos en el carrito en el localStorage
+    cart.push(product); // Agrega el producto actual al carrito
+    localStorage.setItem("cart", JSON.stringify(cart));     // Actualiza el carrito en el localStorage
+    alert("Producto agregado al carrito");
+    actualizarCantidadCarrito();
+};
+
 
 function initialize() {
     featuredProductsContainer = document.querySelector(".featuredProducts")
@@ -103,66 +130,84 @@ function initialize() {
     newsProductsContainer = document.querySelector(".newsProducts")
     console.log(featuredProductsContainer)
     console.log(ofertProductsContainer)
-    console.log(newsProductsContainer   )
+    console.log(newsProductsContainer)
 }
 
+function actualizarCantidadCarrito() {
+    const cartItemCount = document.getElementById("cartItemCount");
+    const cart = JSON.parse(localStorage.getItem("cart")) || []; //Trae carrito desde el localStorage
+    const cantidadProductos = cart.length;     // Calcula la cantidad de productos en el carrito
+    cartItemCount.textContent = cantidadProductos.toString();     // Actualiza el contenido del elemento span
 
-const uploadFeaturedProducts = () => {
-    featuredProducts.forEach(product => {
+}
+
+const uploadFeaturedProducts = async () => {
+    const awaitProducts = await getFeaturedProducts();
+    awaitProducts.forEach(product => {
         const div = document.createElement("div")
         div.classList.add("featuredProduct");
         div.innerHTML = `
             <div class="info">
                 <img src="${product.img}" alt="${product.title}">
-                <p>${product.title}<p>
-                <p>${product.id}</p>
+                <p class="productoTitle">${product.title}<p>
+                <p class="productoId">${product.id}</p>
             </div>
             <div class="info2">
                 <div class="buyButton">
-                    <img src="src/shopping-bag.svg" alt="bag">
-                    <img src="src/plus.svg" alt="plus">
+                    <img src="src/shopping-bag.svg" class="bagSvg" alt="bag">
+                    <img src="src/plus.svg" class="plusSvg" alt="plus">
                     </div>
                     <div class="price">
-                        <p>$${product.precio}</p>
-                        <p>$${product.discountPrecio}</p>
+                        <p class="productoPrecio">$${product.precio}</p>
+                        <p class="productoDiscountPrecio">$${product.discountPrecio}</p>
                     </div>
                 </div>
         `;
 
+        const buyButton = div.querySelector(".buyButton");
+        buyButton.addEventListener("click", () => {
+            handleAddProduct(product);
+        });
         featuredProductsContainer.append(div)
     })
 }
 
-const uploadOfertProducts = () => {
-    ofertProducts.forEach(product => {
+const uploadOfertProducts = async () => {
+    const awaitProducts = await getOfertProducts();
+    awaitProducts.forEach(product => {
         const div = document.createElement("div")
         div.classList.add("ofertProduct");
         div.innerHTML = `
             <div class="info">
-                <img src="src/etiqueta.svg" alt="etiqueta" />
-                <p>${product.ofert}%</p>
+                <img src="src/etiqueta.svg" class="etiquetaSvg" alt="etiqueta" />
+                <p class="productoOfert">${product.ofert}%</p>
                 <img src="${product.img}" alt="${product.title}"/>
-                <p>${product.title}</p>
-                <p>${product.id}</p>
+                <p class="productoTitle" >${product.title}</p>
+                <p class="productoId" >${product.id}</p>
             </div>
             <div class="info2">
                 <div class="buyButton">
-                    <img src="src/shopping-bag.svg" alt="bag"/>
-                    <img src="src/plus.svg" alt="plus">
+                    <img src="src/shopping-bag.svg" class="bagSvg" alt="bag"/>
+                    <img src="src/plus.svg" class="plusSvg" alt="plus">
                 </div>
                 <div class="price">
-                    <p>${product.precio}</p>
-                    <p>${product.discountPrecio}</p>
+                    <p class="productoPrecio" >$${product.precio}</p>
+                    <p class="productoDiscountPrecio">$${product.discountPrecio}</p>
                 </div>
             </div>
         `;
 
+        const buyButton = div.querySelector(".buyButton");
+        buyButton.addEventListener("click", () => {
+            handleAddProduct(product);
+        });
         ofertProductsContainer.append(div)
     })
 }
 
-const uploadNewsProducts = () => {
-    newsProducts.forEach(product => {
+const uploadNewsProducts = async () => {
+    const awaitProducts = await getNewsProducts()
+    awaitProducts.forEach(product => {
         const div = document.createElement('div');
         div.classList.add("newsProduct");
         div.innerHTML = `
@@ -184,15 +229,21 @@ const uploadNewsProducts = () => {
                     <p>${product.precio}</p>
                     <p>${product.discountPrecio}</p>
                 </div>
-                <div class="buyButton">
+                <div class="buyPart">
                     <img src="src/truck.svg" />
                     <p>Order Delivery</p>
-                    <img src="src/shopping-bag.svg" />
-                    <p>Add to cart</p>
+                    <div class="buyButton">
+                        <img src="src/shopping-bag.svg" />
+                        <p>Add to cart</p>
+                    </div>
                 </div>
             </div>
         `;
 
+        const buyButton = div.querySelector(".buyButton");
+        buyButton.addEventListener("click", () => {
+            handleAddProduct(product);
+        });
         newsProductsContainer.append(div);
         console.log(product.img);
     })
@@ -205,4 +256,5 @@ window.addEventListener("load", (event) => {
     uploadFeaturedProducts();
     uploadOfertProducts();
     uploadNewsProducts();
+    actualizarCantidadCarrito();
 });
