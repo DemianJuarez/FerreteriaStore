@@ -159,6 +159,7 @@ nav div {
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    border-radius: 10px;
 }
 
 .newsProduct .info {
