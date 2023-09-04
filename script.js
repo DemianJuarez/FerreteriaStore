@@ -212,32 +212,33 @@ const uploadNewsProducts = async () => {
         div.classList.add("newsProduct");
         div.innerHTML = `
             <div class="info">
-                <img src="${product.img}" />
-                <p>${product.title}</p>
-                <div class="star">
-                    <img src="src/estrellaEntera.svg" />
-                    <img src="src/estrellaEntera.svg" />
-                    <img src="src/estrellaEntera.svg" />
-                    <img src="src/estrellaEntera.svg" />
-                    <img src="src/estrellaVacia.svg" />
-                    <p>126</p>
-                </div>
-                <p>${product.id}</p>
-            </div>
-            <div class="info2"
-                <div class="price">
-                    <p>${product.precio}</p>
-                    <p>${product.discountPrecio}</p>
-                </div>
-                <div class="buyPart">
-                    <img src="src/truck.svg" />
-                    <p>Order Delivery</p>
-                    <div class="buyButton">
-                        <img src="src/shopping-bag.svg" />
-                        <p>Add to cart</p>
+                <img class='productoImg' src="${product.img}" />
+                <div class="infoNews">
+                    <p class=productoTitle>${product.title}</p>
+                    <div class="star">
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaVacia.svg" />
+                        <p>126</p>
+                    </div>
+                    <p>${product.id}</p>
+                    <div class="price">
+                        <p class="productoPrecio">${product.precio}</p>
+                        <p class='productoDiscountPrecio'>${product.discountPrecio}</p>
                     </div>
                 </div>
             </div>
+            <div class="buyPart">
+                <img src="src/truck.svg" />
+                <p>Order Delivery</p>
+                <div class="buyButton">
+                    <img  class="bagSvg" src="src/black-shopping-bag.svg" />
+                    <p>Add to cart</p>
+                </div>
+            </div>
+        </div>
         `;
 
         const buyButton = div.querySelector(".buyButton");

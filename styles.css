@@ -5,7 +5,7 @@
 
 body {
     padding: 50px;
-    background-color: red;
+    background-color: black;
 }
 
 nav {
@@ -17,6 +17,14 @@ nav {
 
 nav div {
     padding: 0px 0px 50px 0px;
+}
+
+.titleProductosDestacados {
+    color: white;
+}
+
+.cartItemCount {
+    color: white;
 }
 
 .featuredProducts {
@@ -144,7 +152,55 @@ nav div {
 }
 
 .newsProduct {
+    background-color: white;
     display: flex;
-    background-color: green;
+    width: 292px;
+    padding: 14px 140px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.newsProduct .info {
+    display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.infoNews {
+    display: flex;
+    flex-direction: column;
+}
+
+.infoNews .productoImg{
+    display: flex;
+}
+
+.infoNews .star {
+    display: flex;
+    flex-direction: row;
+}
+
+.newsProduct .buyPart{
+    display: flex;
+    background-color: #F2F2F2;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.buyPart .bagSvg {
+    fill:black;
+}
+
+.newsProduct .price {
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    align-items: flex-end;
+}
+
+.newsProduct .buyButton {
+    display: flex;
+    align-items: center;
 }
