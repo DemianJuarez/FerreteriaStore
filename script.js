@@ -1,119 +1,128 @@
-const featuredProducts = [
-    //FeaturedProducts
-    {
-        id: "featured-0",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Featured",
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "featured-1",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Featured",
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "featured-2",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Featured",
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "featured-3",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Featured",
-        precio: 999,
-        discountPrecio: 699
-    }
-]
 
-localStorage.setItem("productosEnVenta_featured", JSON.stringify(featuredProducts));
+//localStorage.setItem("productosEnVenta_featured", JSON.stringify(featuredProducts));
 
-async function getFeaturedProducts() {
-    return featuredProducts;
+
+//localStorage.setItem("productosEnVenta_ofert", JSON.stringify(ofertProducts));
+
+
+//localStorage.setItem("productosEnVenta_news", JSON.stringify(newsProducts));
+
+const getProducts = async () => {
+    const api = "https://64f659ae2b07270f705e6753.mockapi.io/api/products"
+    const response = await fetch(api)
+    const data = await response.json()
+    console.log(data)
+
+
+    const featuredProducts = data.filter(product => product.featured)
+    const ofertProducts = data.filter(product => product.onSale)
+    
+    featuredProducts.map(product => {
+        const productFeaturedElement = document.createElement("div")
+        productFeaturedElement.classList.add("featuredProduct")
+        productFeaturedElement.innerHTML = `
+        <div class="info">
+            <img class="featuredImg" src="${product.image}" alt="${product.title}" />
+            <p class="productoTitle">TITULO: ${product.title}</p>
+            <p class="productoId">ID: ${product.id}</p>
+        </div>
+        <div class="info2">
+            <div class="buyButton">
+                <img src="src/shopping-bag.svg" class="bagSvg" alt="bag">
+                <img src="src/plus.svg" class="plusSvg" alt="plus">
+            </div>
+            <div class="price">
+                <p class="productoPrecio">Precio $${product.price}</p>
+                <p class="productoDiscountPrecio">  $${product.previousPrice}</p>
+            </div>
+        </div>
+        `
+
+        featuredProductsContainer.append(productFeaturedElement)
+
+        const featuredBuyButton = productFeaturedElement.querySelector(".buyButton");
+        featuredBuyButton.addEventListener("click", () => {
+        handleAddProduct(product);
+        });
+    })
+
+    ofertProducts.map(product => {
+        const productOfertElement = document.createElement("div")
+        productOfertElement.classList.add("ofertProduct")
+        productOfertElement.innerHTML = `
+        <div class="info">
+            <img src="src/etiqueta.svg" class="etiquetaSvg" alt="etiqueta" />
+            <p class="productoOfert">$10%</p>
+            <img class="ofertImg" src="${product.image}" alt="${product.title}"/>
+            <p class="productoTitle">TITULO: ${product.title}</p>
+            <p class="productoId">ID: ${product.id}</p>
+        </div>
+        <div class="info2">
+            <div class="buyButton">
+                <img src="src/shopping-bag.svg" class="bagSvg" alt="bag"/>
+                <img src="src/plus.svg" class="plusSvg" alt="plus">
+            </div>
+            <div class="price">
+                <p class="productoPrecio" >$${product.price}</p>
+                <p class="productoDiscountPrecio">$${product.previousPrice}</p>
+            </div>
+        </div>
+        `
+
+        ofertProductsContainer.append(productOfertElement)
+
+        const ofertBuyButton = productOfertElement.querySelector(".buyButton");
+        ofertBuyButton.addEventListener("click", () => {
+        handleAddProduct(product);
+        });
+    })
+
+    data.map(product => {
+        const productNewsElement = document.createElement('div')
+        productNewsElement.classList.add("newsProduct")
+        productNewsElement.innerHTML = ` 
+        <div class="info">
+                <img class='productoImg' src="${product.image}" />
+                <div class="infoNews">
+                    <p class=productoTitle>TITULO: ${product.title}</p>
+                    <div class="star">
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaEntera.svg" />
+                        <img src="src/estrellaVacia.svg" />
+                        <p>126</p>
+                    </div>
+                    <p>ID: ${product.id}</p>
+                    <div class="price">
+                        <p class="productoPrecio">${product.price}</p>
+                        <p class='productoDiscountPrecio'>${product.previousPrice}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="buyPart">
+                <img src="src/truck.svg" />
+                <p>Order Delivery</p>
+                <div class="buyButton">
+                    <img  class="bagSvg" src="src/black-shopping-bag.svg" />
+                    <p>Add to cart</p>
+                </div>
+            </div>
+        </div>
+        `
+
+        newsProductsContainer.append(productNewsElement)
+
+
+        const newsBuyButton = productNewsElement.querySelector(".buyButton");
+        console.log(newsBuyButton);
+        newsBuyButton.addEventListener("click", () => {
+        handleAddProduct(product);
+        });
+    })
+    
+
 }
-
-const ofertProducts = [
-    {
-        id: "ofert-4",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Ofert",
-        ofert: 10,
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "ofert-5",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Ofert",
-        ofert : 10,
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "ofert-6",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Ofert",
-        ofert: 10,
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "ofert-7",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "Ofert",
-        ofert: 10,
-        precio: 999,
-        discountPrecio: 699
-    }
-]
-
-localStorage.setItem("productosEnVenta_ofert", JSON.stringify(ofertProducts));
-
-async function getOfertProducts() {
-    return ofertProducts;
-}
-
-const newsProducts = [
-    {
-        id: "news-8",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "News",
-        precio: 999,
-        discountPrecio: 699
-    },
-    {
-        id: "news-9",
-        img: "src/llaveTubo.png",
-        title: "Lorem Ipsum Dolor Sit Amet Consectetur",
-        categoria: "News",
-        precio: 999,
-        discountPrecio: 699
-    }
-]
-
-localStorage.setItem("productosEnVenta_news", JSON.stringify(newsProducts));
-
-async function getNewsProducts() {
-    return newsProducts;
-}
-
-
-let featuredProductsContainer
-let ofertProductsContainer
-let newsProductsContainer
 
 const handleAddProduct = (product) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || []; // Check si ya hay productos en el carrito en el localStorage
@@ -141,121 +150,9 @@ function actualizarCantidadCarrito() {
 
 }
 
-const uploadFeaturedProducts = async () => {
-    const awaitProducts = await getFeaturedProducts();
-    awaitProducts.forEach(product => {
-        const div = document.createElement("div")
-        div.classList.add("featuredProduct");
-        div.innerHTML = `
-            <div class="info">
-                <img src="${product.img}" alt="${product.title}">
-                <p class="productoTitle">${product.title}<p>
-                <p class="productoId">${product.id}</p>
-            </div>
-            <div class="info2">
-                <div class="buyButton">
-                    <img src="src/shopping-bag.svg" class="bagSvg" alt="bag">
-                    <img src="src/plus.svg" class="plusSvg" alt="plus">
-                    </div>
-                    <div class="price">
-                        <p class="productoPrecio">$${product.precio}</p>
-                        <p class="productoDiscountPrecio">$${product.discountPrecio}</p>
-                    </div>
-                </div>
-        `;
-
-        const buyButton = div.querySelector(".buyButton");
-        buyButton.addEventListener("click", () => {
-            handleAddProduct(product);
-        });
-        featuredProductsContainer.append(div)
-    })
-}
-
-const uploadOfertProducts = async () => {
-    const awaitProducts = await getOfertProducts();
-    awaitProducts.forEach(product => {
-        const div = document.createElement("div")
-        div.classList.add("ofertProduct");
-        div.innerHTML = `
-            <div class="info">
-                <img src="src/etiqueta.svg" class="etiquetaSvg" alt="etiqueta" />
-                <p class="productoOfert">${product.ofert}%</p>
-                <img src="${product.img}" alt="${product.title}"/>
-                <p class="productoTitle" >${product.title}</p>
-                <p class="productoId" >${product.id}</p>
-            </div>
-            <div class="info2">
-                <div class="buyButton">
-                    <img src="src/shopping-bag.svg" class="bagSvg" alt="bag"/>
-                    <img src="src/plus.svg" class="plusSvg" alt="plus">
-                </div>
-                <div class="price">
-                    <p class="productoPrecio" >$${product.precio}</p>
-                    <p class="productoDiscountPrecio">$${product.discountPrecio}</p>
-                </div>
-            </div>
-        `;
-
-        const buyButton = div.querySelector(".buyButton");
-        buyButton.addEventListener("click", () => {
-            handleAddProduct(product);
-        });
-        ofertProductsContainer.append(div)
-    })
-}
-
-const uploadNewsProducts = async () => {
-    const awaitProducts = await getNewsProducts()
-    awaitProducts.forEach(product => {
-        const div = document.createElement('div');
-        div.classList.add("newsProduct");
-        div.innerHTML = `
-            <div class="info">
-                <img class='productoImg' src="${product.img}" />
-                <div class="infoNews">
-                    <p class=productoTitle>${product.title}</p>
-                    <div class="star">
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaVacia.svg" />
-                        <p>126</p>
-                    </div>
-                    <p>${product.id}</p>
-                    <div class="price">
-                        <p class="productoPrecio">${product.precio}</p>
-                        <p class='productoDiscountPrecio'>${product.discountPrecio}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="buyPart">
-                <img src="src/truck.svg" />
-                <p>Order Delivery</p>
-                <div class="buyButton">
-                    <img  class="bagSvg" src="src/black-shopping-bag.svg" />
-                    <p>Add to cart</p>
-                </div>
-            </div>
-        </div>
-        `;
-
-        const buyButton = div.querySelector(".buyButton");
-        buyButton.addEventListener("click", () => {
-            handleAddProduct(product);
-        });
-        newsProductsContainer.append(div);
-        console.log(product.img);
-    })
-}
-
 window.addEventListener("load", (event) => {
     console.log("page is fully loaded");
-
     initialize();
-    uploadFeaturedProducts();
-    uploadOfertProducts();
-    uploadNewsProducts();
+    getProducts();
     actualizarCantidadCarrito();
 });

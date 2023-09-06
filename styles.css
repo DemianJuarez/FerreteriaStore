@@ -35,12 +35,15 @@ nav div {
 
 .featuredProduct {
     display: flex;
-    width: 285px;
-    height: 353px;
     background-color: white;
     border-radius: 0.3rem;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.featuredProduct .featuredImg {
+    width: 300px;
+    height: 300px;
 }
 
 .featuredProduct .info {
@@ -115,7 +118,10 @@ nav div {
     flex-direction: column;
 }
 
-
+.ofertProduct .ofertImg {
+    width: 300px;
+    height: 300px;
+}
 
 .ofertProduct .info2 {
     display: flex;
@@ -180,6 +186,11 @@ nav div {
 .infoNews .star {
     display: flex;
     flex-direction: row;
+}
+
+.newsProduct .productoImg {
+    width: 300px;
+    height: 300px;
 }
 
 .newsProduct .buyPart{
