@@ -36,8 +36,7 @@ nav div {
 
 .featuredProduct {
     display: flex;
-    background-color: white;
-    border-radius: 0.3rem;
+    background-color: black;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -48,14 +47,19 @@ nav div {
 }
 
 .featuredProduct .info {
+    background-color: white;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 10px   ;
+    padding: 20px;
+    border-radius: 10px 10px 0 10px;
 }
 
 .featuredProduct .info2 {
+    background-color: white;
     display: flex;
     justify-content: space-between;
+    border-radius: 0 0 10px 10px;
 }
 
 .featuredProduct .buyButton {
@@ -116,6 +120,8 @@ nav div {
 }
 
 
+
+
 .ofertProduct .label {
     position: absolute;
 }
@@ -132,6 +138,15 @@ nav div {
 .ofertProduct .info {
     display: flex;
     flex-direction: column;
+
+    /*
+      background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px 10px 0 10px;
+    */
 }
 
 .ofertProduct .ofertImg {
