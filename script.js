@@ -51,8 +51,10 @@ const getProducts = async () => {
         productOfertElement.classList.add("ofertProduct")
         productOfertElement.innerHTML = `
         <div class="info">
-            <img src="src/etiqueta.svg" class="etiquetaSvg" alt="etiqueta" />
-            <p class="productoOfert">$10%</p>
+            <div class="label">
+                <img src="src/etiqueta.svg" class="etiquetaSvg" alt="etiqueta" />
+                <p class="productoOfert">$10%</p>
+            </div>
             <img class="ofertImg" src="${product.image}" alt="${product.title}"/>
             <p class="productoTitle">TITULO: ${product.title}</p>
             <p class="productoId">ID: ${product.id}</p>

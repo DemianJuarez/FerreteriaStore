@@ -102,7 +102,8 @@ nav div {
     }
 
 .ofertProducts {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 60px;
     padding: 0px 0px 50px 0px;
 }
@@ -112,6 +113,20 @@ nav div {
     background-color: gold;
     border-radius: 0.3rem;
     flex-direction: column;
+}
+
+
+.ofertProduct .label {
+    position: absolute;
+}
+.label img {
+    padding-left: 320px;
+}
+
+.label p {
+    position: absolute;
+    padding-left: 338px;
+    top: 26px;
 }
 
 .ofertProduct .info {
@@ -148,8 +163,6 @@ nav div {
 .etiquetaSvg {
     width: 71px;
     height: 71px;
-    position: absolute;
-    right: 20px;
 }
 
 .newsProducts{
