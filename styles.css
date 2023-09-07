@@ -28,7 +28,8 @@ nav div {
 }
 
 .featuredProducts {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 60px;
     padding: 50px 0px 50px 0px;
 }
@@ -152,7 +153,8 @@ nav div {
 }
 
 .newsProducts{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     padding: 0px 0px 50px 0px;
 }
