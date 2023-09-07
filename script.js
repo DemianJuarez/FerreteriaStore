@@ -88,12 +88,8 @@ const getProducts = async () => {
                 <div class="infoNews">
                     <p class=productoTitle>TITULO: ${product.title}</p>
                     <div class="star">
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaEntera.svg" />
-                        <img src="src/estrellaVacia.svg" />
-                        <p>126</p>
+                        ${createStarRatingHTML(product.stars)}
+                        <p>${product.reviews}</p>
                     </div>
                     <p>ID: ${product.id}</p>
                     <div class="price">
@@ -121,6 +117,18 @@ const getProducts = async () => {
         newsBuyButton.addEventListener("click", () => {
         handleAddProduct(product);
         });
+
+        function createStarRatingHTML(stars) {
+            const starHTML = [];
+            for (let i = 1; i <= 5; i++) {
+                if (i <= stars) {
+                    starHTML.push('<img src="src/estrellaEntera.svg" />');
+                } else {
+                    starHTML.push('<img src="src/estrellaVacia.svg" />');
+                }
+            }
+            return starHTML.join('');
+        }
     })
     
 
