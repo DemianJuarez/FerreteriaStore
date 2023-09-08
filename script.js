@@ -113,7 +113,6 @@ const getProducts = async () => {
 
 
         const newsBuyButton = productNewsElement.querySelector(".buyButton");
-        console.log(newsBuyButton);
         newsBuyButton.addEventListener("click", () => {
         handleAddProduct(product);
         });
@@ -130,9 +129,19 @@ const getProducts = async () => {
             return starHTML.join('');
         }
     })
-    
-
+    const tests = () => {
+        const existsExpensiveProducts = () => {
+                console.log(data)
+                const isExpensive = data.some(product => product.price > 2000)
+                console.log(isExpensive);
+        }
+        existsExpensiveProducts();
+    }
+    tests()
 }
+
+
+
 
 const handleAddProduct = (product) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || []; // Check si ya hay productos en el carrito en el localStorage
@@ -147,9 +156,6 @@ function initialize() {
     featuredProductsContainer = document.querySelector(".featuredProducts")
     ofertProductsContainer = document.querySelector(".ofertProducts")
     newsProductsContainer = document.querySelector(".newsProducts")
-    console.log(featuredProductsContainer)
-    console.log(ofertProductsContainer)
-    console.log(newsProductsContainer)
 }
 
 function actualizarCantidadCarrito() {
@@ -166,3 +172,4 @@ window.addEventListener("load", (event) => {
     getProducts();
     actualizarCantidadCarrito();
 });
+
