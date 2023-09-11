@@ -95,4 +95,5 @@ function applyDiscount() {
 }
 
 const result5 = applyDiscount();
+console.log("products with discount: ");
 console.log(result5);   
