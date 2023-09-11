@@ -67,3 +67,32 @@ const searchMacbooks = () => {
     }
 }
 searchMacbooks();
+
+
+// EJERCICIO 8 
+
+const existsExpensiveProducts = () => {
+    const expensiveProduct = products.find(product => product.price >= 2000);
+    if (expensiveProduct) {
+        return true;
+    }
+}
+
+const result4 = existsExpensiveProducts();
+console.log(result4);
+
+
+function applyDiscount() {
+    const discountedProducts = [];
+    
+    products.forEach(product => {
+        const discountedPrice = product.price * 0.9; // Aplicar un 10% de descuento
+        const discountedProduct = { ...product, price: discountedPrice };
+        discountedProducts.push(discountedProduct);
+    });
+
+    return discountedProducts;
+}
+
+const result5 = applyDiscount();
+console.log(result5);   
